@@ -7,15 +7,9 @@ try:
         'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'}
     URL = "https://www.imdb.com/chart/top/"
     PROXY = {"http": "http//80.48.119.28:8080"}
-    # PROXY = {
-    #     "http": "http://10.10.1.10:3128",
-    #     "https": "http://10.10.1.10:1080",
-    #     "ftp": "ftp://10.10.1.10:3128"
-    # }
+
     response = requests.get(URL, proxies=PROXY, headers=HEADER)
     page_html = response.text
-    # source = requests.get('https://www.imdb.com/chart/top/')
-    # source.raise_for_status()
 
     soup = BeautifulSoup(page_html, 'html.parser')
 
