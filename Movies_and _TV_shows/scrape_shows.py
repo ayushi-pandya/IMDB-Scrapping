@@ -3,10 +3,15 @@ from bs4 import BeautifulSoup
 import requests
 
 try:
-    source = requests.get('https://www.imdb.com/showtimes/location?ref_=sh_lc')
-    source.raise_for_status()
+    HEADER = {
+        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'}
+    URL = "https://www.imdb.com/showtimes/location?ref_=sh_lc"
+    PROXY = {"http": "http//80.48.119.28:8080"}
 
-    soup = BeautifulSoup(source.text, 'html.parser')
+    response = requests.get(URL, proxies=PROXY, headers=HEADER)
+    page_html = response.text
+
+    soup = BeautifulSoup(page_html, 'html.parser')
 
     shows = soup.find('div', class_='lister-list').find_all('div', class_='lister-item mode-grid')
     # print(shows)
