@@ -35,6 +35,7 @@ try:
         rating_list.append(rating)
 
         # print(rank, name, year, rating)
+
     details_dict = {'Movie Rank': rank_list,
                     'Movie Name': name_list,
                     'Movie Year': year_list,
