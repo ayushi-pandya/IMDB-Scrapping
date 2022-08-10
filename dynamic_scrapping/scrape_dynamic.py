@@ -3,9 +3,16 @@ import requests
 import pandas as pd
 
 try:
+
     HEADER = {
         'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'}
-    URL = "https://www.imdb.com/chart/top/"
+
+    text = 'nv'
+    mode = 'simple'
+    page_count = '1'
+
+    URL = "https://www.imdb.com/chart/top/?sort=" + text + ",desc&mode=" + mode + "&page=" + page_count
+
     PROXY = {"http": "http//80.48.119.28:8080"}
 
     response = requests.get(URL, proxies=PROXY, headers=HEADER)
@@ -14,7 +21,6 @@ try:
     soup = BeautifulSoup(page_html, 'html.parser')
 
     movies = soup.find('tbody', class_='lister-list').find_all('tr')
-    # print(len(movies))
 
     rank_list = []
     name_list = []
@@ -42,20 +48,7 @@ try:
                     'IMDB Ratings': rating_list}
 
     output = pd.DataFrame(details_dict)
-    output.to_csv("/home/ayushi/Desktop/IMDB_TRM_data.csv", index=False)
+    output.to_csv("/home/ayushi/Desktop/IMDB_TRM_dynamic_data.csv", index=False)
 
 except Exception as e:
     print(e)
-
-
-# from bs4 import BeautifulSoup
-# from selenium.webdriver import Chrome
-#
-# driver = Chrome(executable_path='/chromedriver')
-# driver.get('https://quotes.topscrape.com/js')
-#
-# soup = BeautifulSoup(driver.page_source, 'html.parser')
-# author_element = soup.find('small', class_='author')
-# print(author_element.text)
-#
-# driver.quit()
