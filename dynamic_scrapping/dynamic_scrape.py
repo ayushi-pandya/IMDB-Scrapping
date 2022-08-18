@@ -41,7 +41,7 @@ try:
         name_list.append(name)
         print(name)
 
-    details_dict = {'Movie Name': name_list}
+    details_dict = {'Movie': name_list}
 
     output = pd.DataFrame(details_dict)
     output.to_csv("/home/ayushi/Desktop/search_data.csv", index=False)
